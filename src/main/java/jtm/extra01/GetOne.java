@@ -1,7 +1,6 @@
 package jtm.extra01;
 
 public class GetOne {
-
 	public int iterations(int number) {
 		// TODO #1: Implement method which processes the passed positive number
 		// value until it's
@@ -13,6 +12,16 @@ public class GetOne {
 		// 6->3->10->5->16->8->4->2->1. Iteration count=8.
 		// HINT: Use while loop.
 		int iterationCount = 0;
+		while (number != 1) {
+			if (number % 2 == 0) {
+				number = number / 2;
+				iterationCount++;
+			} else {
+				number = number * 3 + 1;
+				iterationCount++;
+			}
+
+		}
 		return iterationCount;
 	}
 
@@ -24,7 +33,17 @@ public class GetOne {
 		// And return 3, because it has the biggest count of iterations.
 		// (If count of iterations is the same for several numbers, return
 		// smallest number).
-		return 0;
+		int complexNo = 1;
+		int maxIter = iterations(complexNo);
+		int numIter;
+		for (int i = 1; i <= maxNumber; i++) {
+			numIter = iterations(i);
+			if (numIter > maxIter) {
+				complexNo = i;
+				maxIter = numIter;
+			}
+		}
+		return complexNo;
 	}
 
 }
