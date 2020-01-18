@@ -15,7 +15,15 @@ public class Array {
 		// Hint: use Arrays.sort(...) from
 		// https://docs.oracle.com/javase/7/docs/api/java/util/Arrays.html
 		// START
-
+		array = new int[args.length];
+			for (int i = 0; i<args.length; i++) {
+				array[i] = Integer.parseInt(args[i]);
+			}
+		Arrays.sort(array);
+		printSortedArray();
+		returnSortedArray();
+		
+		
 		// END
 	}
 
@@ -23,16 +31,16 @@ public class Array {
 		// TODO print content of array on standard output
 		// Hint: use Arrays.toString(array) method for this
 		// START
-
+		System.out.println(Arrays.toString(array));
 		// END
 	}
 
 	public static int[] returnSortedArray() {
 		// TODO return reference to this array
 		// START
-
+		
 		// END
-		return null;
+		return array;
 	}
 
 }

@@ -1,11 +1,15 @@
 package jtm.activity03;
 
+import java.util.Arrays;
+
 /**
  * Black Knight is brave soldier who fights till he is alive. He doesn't bother
  * if some of his arms or legs are cut off. You can kill him only when he lose
  * head. More info at:
  * https://en.wikipedia.org/wiki/Black_Knight_%28Monty_Python%29
  */
+
+
 public class BlackKnight {
 	// Class variables which are shared between all class members (objects)
 	public static short totalKnights; // total number of knights at the start of
@@ -23,7 +27,9 @@ public class BlackKnight {
 		// TODO initialize new array of knights with the passed size.
 		// Reset total numbers of total and alive knights to zero
 		// START
-
+		knights = new BlackKnight[initialNumber];
+		aliveKnights = 0;
+		deadKnights = 0;
 		// END
 	}
 
@@ -37,7 +43,13 @@ public class BlackKnight {
 		// HINT: use "this.name" to access name of knight which otherwise is shadowed
 		// by parameter of constructor, which is also called "name"
 		// START
-
+		this.arms = 2;
+		this.head = 1;
+		this.legs = 2;
+		this.alive = true;
+		knights[totalKnights] = this;
+		totalKnights++;
+		aliveKnights++;
 		// END
 	}
 
@@ -47,9 +59,17 @@ public class BlackKnight {
 		// If knight has some arms, cut one off and return "Bugger!"
 		// Else return just "Haah!"
 		// START
-
+		String message = "";
+		if (this.alive = false) {
+			message = "Only chicken beats dead!";
+		}
+		if (this.arms > 0) {
+			this.arms--;
+			message = "Bugger!";
+		} else
+			message = "Haah!";
 		// END
-		return "";
+		return message;
 	}
 
 	public String cutOffLeg() {
@@ -58,9 +78,17 @@ public class BlackKnight {
 		// If knight has some legs, cut one off and return "Bollocks!"
 		// Else return just "Haah!"
 		// START
-
+		String message = "";
+		if (this.alive = false) {
+			message = "Only chicken beats dead!";
+		}
+		if (this.legs > 0) {
+			this.legs--;
+			message = "Bollocks!";
+		} else
+			message = "Haah!";
 		// END
-		return "";
+		return message;
 	}
 
 	public String cutOffHead() {
@@ -73,9 +101,22 @@ public class BlackKnight {
 		// Where "Arthur, Cnut" are names of still alive knights
 		// Else return "You'l burn in hell forever!"
 		// START
+		String message = "";
+		if (this.alive = false) {
+			message = "Only chicken beats dead!";
+		}
+		if (this.alive = true && this.head == 1) {
+			this.head--;
+			aliveKnights--;
+			deadKnights++;
+			if (aliveKnights != 0) {
+				message = "You'l newer win!" + aliveKnights() + " will still fight!";
+			} else
+				message = "You'l burn in hell forever!";
 
+		}
 		// END
-		return "";
+		return message;
 	}
 
 	// START
@@ -85,7 +126,17 @@ public class BlackKnight {
 		// e.g. if Cnut and Arthur are still alive return Cnut, Arthur
 		// If only Arthur is alive return Arthur
 		// If no one is alive return empty string
-		return null;
+
+		String nameAliveKnights = "";
+		for (int i = 0; i < knights.length; i++) {
+			if (knights[i].alive == true) {
+				nameAliveKnights +=  knights[i].name + ", ";
+			}
+		}
+		return nameAliveKnights;
 	}
 	// END
+	
+	
+	
 }
