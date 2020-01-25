@@ -11,12 +11,24 @@ public class ArrayListMethods {
 		// passed comparator.
 		// Return list with values that are smaller than comparator.
 		// Hint: Investigate how varargs are used.
+
+		for (int i = 0; i < numbers.length; i++) {
+			if (numbers[i] < comparator) {
+				myList.add(numbers[i]);
+			}
+		}
 		return myList;
 	}
 
 	public int sumResult() {
-		int sum = 0;
 		// TODO #2: Count element sum of the list
+
+		int sum = 0;
+		for (int i = 0; i < myList.size(); i++) {
+			sum += myList.get(i);
+		}
+
 		return sum;
+
 	}
 }

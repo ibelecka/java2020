@@ -1,21 +1,24 @@
-package jtm.tasks.fundamentals;
+package jtm.activity04;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class ArrayLeaders {
+public class Test {
+	public static void main(String[] args) {
+	
+	int[] num = {3, 4, 50, 5, 4};
+	
+	int ans[];
+	ans  =  arrayLeaders(num);
+	
+	System.out.println("ans " + Arrays.toString(ans));
+	
+	}
+	
+	
+	
 
-    /*
-        TODO
-        Given an array/list [] of integers , Find all the LEADERS in the array.
-        An element is leader if it is greater than The Sum all the elements to its right side.
-
-        Array size is at least 3 .
-        Array numbers Will be mixture of positives , negatives and zeros
-        Repetition of numbers in the array could occur.
-        Returned Array should store the leading numbers in the same order in the original array.
-     */
-    public static int[] arrayLeaders(int[] numbers) {
+	public static int[] arrayLeaders(int[] numbers) {
 		int sum = 0;
 		ArrayList<Integer> leadersList = new ArrayList<Integer>();
 		for (int i = 0; i < numbers.length; i++) {
@@ -36,5 +39,6 @@ public class ArrayLeaders {
 		}
 
 		return leaders;
-    }
+	}
+
 }

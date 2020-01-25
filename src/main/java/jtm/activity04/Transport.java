@@ -2,13 +2,12 @@ package jtm.activity04;
 
 import java.util.Locale;
 
-
 public class Transport {
 	// Do not change access modifiers to encapsulate internal properties!
 	private String id; // Transport registration number
-	private float consumption; // fuel consumption in litres per 100km
+	protected float consumption; // fuel consumption in litres per 100km
 	private int tankSize; // tank size in litres
-	private float fuelInTank; // fuel in tank
+	protected float fuelInTank; // fuel in tank
 
 	/*- TODO #1
 	 * Generate Constructor using Fields...
@@ -16,13 +15,16 @@ public class Transport {
 	 * values of the newly created object
 	 * And make fuel tank full.
 	 */
-	
+
 	public Transport(String id, float consumption, int tankSize) {
-		super();
 		this.id = id;
 		this.consumption = consumption;
 		this.tankSize = tankSize;
 		this.fuelInTank = tankSize;
+	}
+
+	public Transport() {
+		;
 	}
 
 	/*- TODO #2
@@ -61,8 +63,6 @@ public class Transport {
 		this.fuelInTank = fuelInTank;
 	}
 
-	
-	
 	/*- TODO #3
 	 * Generate toString()...
 	 * and implement this method, that t returns String in form:
@@ -73,9 +73,8 @@ public class Transport {
 	 */
 	@Override
 	public String toString() {
-		return "Id:" + id + " cons:" + String.format(Locale.US, "%.1f", consumption ) + "l/100km, tank:" 
-				+ tankSize + "l, fuel:"
-				+ String.format(Locale.US, "%.2f", fuelInTank) + "l";
+		return "Id:" + id + " cons:" + String.format(Locale.US, "%.1f", consumption) + "l/100km, tank:" + tankSize
+				+ "l, fuel:" + String.format(Locale.US, "%.2f", fuelInTank) + "l";
 	}
 
 	// Return transport id and type as string e.g. "AAA Transport"
@@ -84,11 +83,6 @@ public class Transport {
 		String name = id + " " + this.getClass().getSimpleName();
 		return name;
 	}
-
-
-
-
-
 
 	// HINT: use getType() to describe transport and road.toString() to describe
 	// road
@@ -99,17 +93,15 @@ public class Transport {
 		// necessary amount and return String in form:
 		// "AAA Type is moving on From–To, 180km"
 		String message;
-		float fuel = road.getDistance() * this.consumption/100;
+		float fuel = road.getDistance() * this.consumption / 100;
 		if (fuel < this.fuelInTank) {
 			this.fuelInTank -= fuel;
 			message = this.getType() + " is moving on " + road.toString();
 		} else {
-			message = "Cannot move on " + road.toString() + ". Necessary fuel:" 
-					+ String.format(Locale.US, "%.2f", fuel) + "l, fuel in tank:"
-//					+this.fuelInTank + "l";
-					+ String.format(Locale.US, "%.2f", this.fuelInTank) + "l";
+			message = "Cannot move on " + road.toString() + ". Necessary fuel:" + String.format(Locale.US, "%.2f", fuel)
+					+ "l, fuel in tank:" + String.format(Locale.US, "%.2f", this.fuelInTank) + "l";
 		}
-		
+
 		// TODO If there is no enough fuel in tank, return string in form:
 		// "Cannot move on From–To, 180km. Necessary
 		// fuel:0.00l, fuel in tank:0.00l"
