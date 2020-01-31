@@ -25,9 +25,96 @@ package jtm.activity09;
  * 
  */
 
-public class Order {
+public class Order implements Comparable<Order> {
 	String customer; // Name of the customer
 	String name; // Name of the requested item
 	int count; // Count of the requested items
+
+	public Order(String orderer, String itemName, Integer count) {
+		this.customer = orderer;
+		this.name = itemName;
+		this.count = count;
+	}
+
+	@Override
+	public String toString() {
+		return this.customer + ": " + this.name + ": " + this.count;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + count;
+		result = prime * result + ((customer == null) ? 0 : customer.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Order other = (Order) obj;
+		if (this.compareTo(other) == 0) {
+			return true;
+		} else {
+			return false;
+		}
+		
+		
+//		if (count != other.count)
+//			return false;
+//		if (customer == null) {
+//			if (other.customer != null)
+//				return false;
+//		} else if (!customer.equals(other.customer))
+//			return false;
+//		if (name == null) {
+//			if (other.name != null)
+//				return false;
+//		} else if (!name.equals(other.name))
+//			return false;
+//		return true;
+	}
+
+	@Override
+	public int compareTo(Order o) {
+
+		if (this.customer.compareTo(o.customer) != 0) {
+			if (this.customer.compareTo(o.customer) > 0) {
+				return 1;
+			} else if ((this.customer.compareTo(o.customer) < 1)) {
+				return -1;
+			} else {
+				return 0;
+			}
+		}
+		if (this.name.compareTo(o.name) != 0) {
+			if (this.name.compareTo(o.name) > 0) {
+				return 1;
+			} else if ((this.name.compareTo(o.name) < 1)) {
+				return -1;
+			} else {
+				return 0;
+			}
+		}
+
+		if (this.count != o.count) {
+			if (this.count > o.count) {
+				return 1;
+			} else if (this.count < o.count) {
+				return -1;
+			} else {
+				return 0;
+			}
+		}
+
+		return 0;
+	}
 
 }

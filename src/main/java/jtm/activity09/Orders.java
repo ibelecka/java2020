@@ -1,5 +1,13 @@
 package jtm.activity09;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Set;
 
 /*- TODO #2
  * Implement Iterator interface with Orders class
@@ -29,7 +37,7 @@ package jtm.activity09;
  *  - ItemN: Customer1,Customer2: 4
  */
 
-public class Orders {
+public class Orders implements Iterator<Order>{
 	/*-
 	 * TODO #1
 	 * Create data structure to hold:
@@ -40,4 +48,68 @@ public class Orders {
 	 *   2. when constructing list of orders, set number of current order to -1
 	 *      (which is usual approach when working with iterateable collections).
 	 */
+	
+
+
+	private List <Order> orderList;
+	private ListIterator<Order> iterator;
+	
+	
+	
+	
+	
+	public Orders() {
+		this.orderList = new LinkedList<>();
+		this.iterator = orderList.listIterator();;
+	}
+	
+	
+	public void add (Order item) {
+		this.iterator.add(item);
+		this.iterator.previous();
+	}
+	
+	public List <Order> getItemsList() {
+		List<Order> cloneList = new ArrayList<Order>(orderList);
+//		cloneList.addAll(orderList);
+		return cloneList;
+	}
+	
+	public Set <Order> getItemsSet() {
+		Set<Order> hashSet = new HashSet<Order>(orderList);
+
+		return hashSet;
+	}
+	
+	public void sort() {
+		Collections.sort(orderList);
+		}
+	
+	
+	@Override
+	public String toString() {
+		return orderList.toString() ;
+	}
+	
+	@Override
+	public void remove() {
+		// TODO Auto-generated method stub
+		iterator.remove();
+	}
+	
+	@Override
+	public boolean hasNext() {
+		if (iterator.hasNext()) {
+			return true;
+		}
+		return false;
+	}
+	@Override
+	public Order next() {
+		// TODO Auto-generated method stub
+		
+		return iterator.next();
+	} 
+	
+	
 }
