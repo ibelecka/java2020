@@ -3,6 +3,7 @@ package jtm.extra14;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import static org.junit.Assert.assertArrayEquals;
@@ -17,53 +18,51 @@ public class CoinFlip {
 	 * 
 	 * coin(1) should return {"H", "T"} coin(2) should return {"HH", "HT", "TH",
 	 * "TT"} coin(3) should return {"HHH", "HHT", "HTH", "HTT", "THH", "THT", "TTH",
-	 * "TTT"}
+	 * "TTT"} [ TTH, , THT, TTT]
 	 * 
 	 * When finished sort them alphabetically.
 	 */
 
 	public static String[] coinFlip(int n) {
-		int numComb = 1;
-		int headCount = 0;
-		int tailCount = 0;
-//    	List<String> combos = new ArrayList<>();
-		for (int i = 1; i <= n; i++) {
-			numComb = numComb * 2;
-		}
-		String[] combos = new String[numComb];
-
-		for (int i = 0; i < numComb; i++) {
-			combos[i] = "";
-		}
-
-		for (int i = 0; i < n; i++) {
-			headCount = 0;
-			tailCount = 0;
-			int d = 1;
-			for (int x = 0; x < i; x++) {
-				d = d * 2;
-			}
-			for (int j = 0; j < combos.length; j++) {
-				for (int c = 0; c < d; c++) {
-					if (headCount < numComb / 2) {
-						combos[j] += "H";
-						headCount++;
-					} else if (tailCount < 2) {
-						tailCount++;
-						combos[j] += "T";
-					}
+		String s = "";
+		int count = (int) Math.pow(2, n);
+		String[] combos = new String[count];
+		String[] init = { "H", "T" };
+		combos[0] = init[0];
+		combos[1] = init[1];
+		for (int i = 2; i <= n; i++) {
+			count = (int) Math.pow(2, i);
+			for (int k = count - 1; k >= count / 2; k--) {
+				System.out.println("i = " + i + " j = " + " k = " + k);
+				s = "";
+				if (combos[k - count / 2] == null || combos[k - count / 2].isEmpty()) {
+					s = init[1];
+				} else {
+					s = combos[k - count / 2] + init[1];
 				}
+				combos[k] = s;
+				System.out.println("i = " + i + " j = " + " k = " + k + " comb = " + combos[k]);
+			}
+
+			for (int k = count / 2 - 1; k >= 0; k--) {
+				s = "";
+				if (combos[k] == null || combos[k].isEmpty()) {
+					s = init[0];
+				} else {
+					s = combos[k] + init[0];
+				}
+				combos[k] = s;
+				System.out.println("i = " + i + " j = " + " k = " + k + " comb = " + combos[k]);
 			}
 		}
-
-		System.out.println(Arrays.toString(combos));
-		return null;
+		Arrays.sort(combos);
+		return combos;
 	}
 
 	public static void main(String[] args) {
 		// Expected "HH", "HT", "TH", "TT"
 		String[] res = CoinFlip.coinFlip(3);
-		System.out.println(res);
+		System.out.println(Arrays.toString(res));
 	}
 
 	/*
